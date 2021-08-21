@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {todolistApi} from "../api/todolist-api";
 import {tasksApi} from "../api/tasks-api";
 
 export default {
@@ -21,7 +20,7 @@ export const GetTasks = () => {
   return <div> {JSON.stringify(state)}</div>
 }
 
-export const createTask = () => {
+export const CreateTask = () => {
   const [state, setState] = useState<any>(null)
   const todolistId = 'f0e09a24-5478-43c8-941b-8ea0c9c0b9c8'
   const taskTitle = 'Briws Todo'

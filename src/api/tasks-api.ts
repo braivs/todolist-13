@@ -1,12 +1,5 @@
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: 'https://social-network.samuraijs.com/api/1.1',
-  withCredentials: true,
-  headers: {
-    'API-KEY': '06e9c310-f07c-441a-811c-ffc5ac00e636'
-  }
-})
+import {instance} from "./common-instance";
+import {CommonResponseType} from "./common-types";
 
 type TaskType = {
   addedDate: string
@@ -30,25 +23,24 @@ type TaskDataType = {
   deadline: string
 }
 
-type CommonResponseTaskType<T = {}> = {
-  data: T
-  fieldsErrors: Array<string>
-  messages: Array<string>
-  resultCode: number
+type GetTasksResponse = {
+  error: string | null
+  totalCount: number
+  items: TaskType[]
 }
 
 export const tasksApi = {
   getTasks(todolistId: string) {
-    return instance.get<Array<TaskType>>(`/todo-lists/${todolistId}/tasks`)
+    return instance.get<GetTasksResponse>(`/todo-lists/${todolistId}/tasks`)
   },
   createTask(todolistId: string, taskTitle: string) {
     let promise = instance.post<Array<TaskType>>(`/todo-lists/${todolistId}/tasks`, {title: taskTitle})
     return promise
   },
   deleteTask(todolistId: string, taskId: string) {
-    return instance.delete<CommonResponseTaskType>(`/todo-lists/${todolistId}/tasks/${taskId}`)
+    return instance.delete<CommonResponseType>(`/todo-lists/${todolistId}/tasks/${taskId}`)
   },
   updateTask(todolistId: string, taskId: string, data: TaskDataType) {
-    return instance.put<CommonResponseTaskType<{item: TaskType}>>(`/todo-lists/${todolistId}/tasks/${taskId}`, data)
+    return instance.put<CommonResponseType<{item: TaskType}>>(`/todo-lists/${todolistId}/tasks/${taskId}`, data)
   }
 }

@@ -1,50 +1,5 @@
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: 'https://social-network.samuraijs.com/api/1.1',
-  withCredentials: true,
-  headers: {
-    'API-KEY': '06e9c310-f07c-441a-811c-ffc5ac00e636'
-  }
-})
-
-
-/*
-function f1() {
-  return 1 + 2
-}
-function f2() {
-  return 3 + 4
-}
-function f3() {
-  return 5 + 6
-}
-*/
-
-function f(a: number, b: number) {
-  return a + b
-}
-
-type CommonResponseType<T = {}> = {
-  fieldsErrors: Array<string>
-  messages: Array<string>
-  resultCode: number
-  data: T
-}
-
-/*type CreateTodolistResponseType = {
-  data: {item: TodoType}
-  fieldsErrors: Array<string>
-  messages: Array<string>
-  resultCode: number
-}*/
-
-/*type DeleteUpdateTodoResponseType = {
-  data: {}
-  fieldsErrors: Array<string>
-  messages: Array<string>
-  resultCode: number
-}*/
+import {instance} from "./common-instance";
+import {CommonResponseType} from "./common-types";
 
 type TodoType = {
   id: string
