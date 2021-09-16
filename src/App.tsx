@@ -1,4 +1,3 @@
-//circle 2
 import React, {useCallback, useReducer, useState} from 'react'
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
